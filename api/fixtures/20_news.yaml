@@ -1,0 +1,6 @@
+App\Entity\News:
+    news_{1..20}:
+        title: <sentence()>
+        slug: <slug()>
+        text: <randomHtml(2,3)>
+        author: '@user*'

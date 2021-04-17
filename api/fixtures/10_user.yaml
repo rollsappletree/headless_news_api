@@ -1,0 +1,9 @@
+App\Entity\User:
+    user_{1..5}:
+        email: <email()>
+        password: <password()>
+        roles: ["ROLE_USER"]
+    user_admin:
+        email: rollsappletree@gmail.com
+        password: \$argon2id\$v=19\$m=65536,t=4,p=1\$+yNvNNrN0/eRc23ShYRoGA\$uPRoC+QsIruALWG4nCt0ejOEyzWm2wiEyZ5ERRVCWrE
+        roles: ["ROLE_ADMIN"]

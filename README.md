@@ -51,3 +51,9 @@ It means that you can:
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+
+## TODO:
+[docker-entrypoint script of api-platform/demo](https://github.com/api-platform/demo/blob/master/api/docker/php/docker-entrypoint.sh)
+Add Timestampable to news
+[uudi](https://symfonycasts.com/screencast/api-platform-extending/uuid)

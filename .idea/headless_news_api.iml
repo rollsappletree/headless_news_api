@@ -111,6 +111,20 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/php-cs-fixer/diff" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/phpdocumentor/type-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/lexik/jwt-authentication-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/nelmio/alice" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/theofidry/alice-data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/hautelook/alice-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

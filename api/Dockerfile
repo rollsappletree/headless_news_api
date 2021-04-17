@@ -12,6 +12,7 @@ FROM php:${PHP_VERSION}-fpm-alpine AS api_platform_php
 
 # persistent / runtime deps
 RUN apk add --no-cache \
+		bash \
 		acl \
 		fcgi \
 		file \

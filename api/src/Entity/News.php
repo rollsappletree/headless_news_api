@@ -5,11 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\NewsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=NewsRepository::class)
  */
+#[ApiResource(normalizationContext: ['groups' => ['news']])]
 class News
 {
     /**
@@ -21,22 +23,26 @@ class News
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("news")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("news")
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("news")
      */
     private $text;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="news")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("news")
      */
     private $author;
 

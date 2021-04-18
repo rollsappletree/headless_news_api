@@ -1,0 +1,11 @@
+attributes:
+    App\Entity\News:
+        title:
+            groups: ['read', 'write']
+        slug:
+            groups: ['read']
+        text:
+            groups: ['read', 'write']
+        author:
+            groups: ['read']
+    

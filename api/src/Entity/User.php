@@ -1,17 +1,20 @@
-<?php
+<?php /** @noinspection PhpPropertyOnlyWrittenInspection */
 
-namespace App\Entity;
+    namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
+#[ApiResource]
 class User implements UserInterface
 {
     /**
@@ -19,23 +22,25 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("news")
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("write")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\OneToMany(targetEntity=News::class, mappedBy="author", orphanRemoval=true)
@@ -98,7 +103,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -131,7 +136,7 @@ class User implements UserInterface
     /**
      * @return Collection|News[]
      */
-    public function getNews(): Collection
+    public function getNews(): Collection|array
     {
         return $this->news;
     }

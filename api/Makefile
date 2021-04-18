@@ -13,6 +13,9 @@ build_docker: ##rebuild docker environment
 bash: ##open a bash into php container
 	docker-compose exec php bash
 
+caddy: ##open a bash into php container
+	docker-compose exec caddy sh
+
 symfony_install_cli: ##install 'symfony' command from the net
 	docker-compose exec php 'wget https://get.symfony.com/cli/installer -O - | bash'
 

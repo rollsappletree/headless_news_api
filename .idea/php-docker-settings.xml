@@ -6,11 +6,12 @@
         <entry key="9d5a9d78-c3dd-4804-9689-89557d20b906">
           <value>
             <DockerContainerSettings>
+              <option name="runCliOptions" value="" />
               <option name="version" value="1" />
               <option name="volumeBindings">
                 <list>
                   <DockerVolumeBindingImpl>
-                    <option name="containerPath" value="/opt/project" />
+                    <option name="containerPath" value="/srv" />
                     <option name="hostPath" value="$PROJECT_DIR$" />
                   </DockerVolumeBindingImpl>
                 </list>

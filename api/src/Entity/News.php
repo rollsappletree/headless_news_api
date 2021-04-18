@@ -11,7 +11,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource()
  * @ORM\Entity(repositoryClass=NewsRepository::class)
  */
-#[ApiResource(normalizationContext: ['groups' => ['news']])]
 class News
 {
     /**

@@ -39,10 +39,8 @@ final class AddAuthorToNewsSubscriber implements EventSubscriberInterface
 
         if (!$news instanceof News || Request::METHOD_POST !== $method) {
             // Only handle News entities (Event is called on any Api entity)
-            dump('Not a news');
             return;
         }
-        dump($news);
         // maybe these extra null checks are not even needed
         $token = $this->tokenStorage->getToken();
         if (!$token) {

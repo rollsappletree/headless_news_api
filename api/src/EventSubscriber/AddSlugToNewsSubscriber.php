@@ -23,7 +23,11 @@ final class AddSlugToNewsSubscriber implements EventSubscriberInterface
     {
         $news = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
-        $permittedMethods = [Request::METHOD_POST, Request::METHOD_PATCH];
+        $permittedMethods = [
+            Request::METHOD_POST,
+            Request::METHOD_PATCH,
+            Request::METHOD_PUT
+        ];
 
         if (!$news instanceof News || !in_array($method, $permittedMethods)) {
             // Only handle News entities (Event is called on any Api entity)

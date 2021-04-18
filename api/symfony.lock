@@ -161,6 +161,9 @@
             "fixtures/.gitignore"
         ]
     },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
+    },
     "laminas/laminas-code": {
         "version": "4.1.0"
     },
@@ -534,6 +537,9 @@
     },
     "symfony/string": {
         "version": "v5.2.6"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.7"
     },
     "symfony/translation-contracts": {
         "version": "v2.3.0"

@@ -44,12 +44,26 @@ class AuthenticationTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertArrayHasKey('token', $json);
 
+        // test IS_AUTHENTICATED_ANONYMOUSLY (not autorized) route
+        $client->request('GET', '/news');
+        $this->assertResponseIsSuccessful();
+
+        // test IS_AUTHENTICATED_ANONYMOUSLY (authorized) route
+        $client->request('GET', '/news', ['auth_bearer' => $json['token']]);
+        $this->assertResponseIsSuccessful();
+
         // test not authorized
-        $client->request('GET', '/greetings');
+        $client->request('POST', '/news');
         $this->assertResponseStatusCodeSame(401);
 
         // test authorized
-        $client->request('GET', '/greetings', ['auth_bearer' => $json['token']]);
+        $client->request('POST', '/news', [
+            'json' => [
+                'title' => 'The Handmaid\'s Tale',
+                'text' => 'Brilliantly conceived and executed, this powerful evocation of twenty-first century America gives full rein to Margaret Atwood\'s devastating irony, wit and astute perception.',
+                ],
+            'auth_bearer' => $json['token']
+        ]);
         $this->assertResponseIsSuccessful();
     }
 }

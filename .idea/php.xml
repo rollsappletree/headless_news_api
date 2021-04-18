@@ -126,6 +126,7 @@
       <path value="$PROJECT_DIR$/api/vendor/sebastian/recursion-context" />
       <path value="$PROJECT_DIR$/api/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/api/vendor/hautelook/alice-bundle" />
+      <path value="$PROJECT_DIR$/api/vendor/justinrainbow/json-schema" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -195,4 +196,9 @@
     </phpInfoCache>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <phpunit_by_interpreter interpreter_id="9d5a9d78-c3dd-4804-9689-89557d20b906" custom_loader_path="/srv/api/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
 </project>

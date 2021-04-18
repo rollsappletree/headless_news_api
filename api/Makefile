@@ -16,10 +16,7 @@ bash: ##open a bash into php container
 caddy: ##open a bash into php container
 	docker-compose exec caddy sh
 
-symfony_install_cli: ##install 'symfony' command from the net
-	docker-compose exec php 'wget https://get.symfony.com/cli/installer -O - | bash'
-
-fixtures: ##Run Fixtures
+run_fixtures: ##run fixtures
 	docker-compose exec php php bin/console hautelook:fixtures:load
 
 create_jwt_secrets:
@@ -33,3 +30,5 @@ create_jwt_secrets:
         setfacl -R -m u:www-data:rX -m u:"$$(whoami)":rwX config/jwt;\
         setfacl -dR -m u:www-data:rX -m u:"$$(whoami)":rwX config/jwt;'
 
+run_tests: ##Run tests
+	docker-compose exec php bin/phpunit --testdox

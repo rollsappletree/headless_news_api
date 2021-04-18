@@ -23,7 +23,7 @@ class News
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("news")
+     * @Groups({"news", "write"})
      */
     private $title;
 
@@ -35,7 +35,7 @@ class News
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("news")
+     * @Groups({"news", "write"})
      */
     private $text;
 

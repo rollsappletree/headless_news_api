@@ -60,6 +60,13 @@ RUN set -eux; \
 	\
 	apk del .build-deps
 
+ARG XDEBUG_VERSION=3.0.2
+RUN set -eux; \
+ apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+ pecl install xdebug-$XDEBUG_VERSION; \
+ docker-php-ext-enable xdebug; \
+ apk del .build-deps
+
 ###> recipes ###
 ###< recipes ###
 

@@ -10,6 +10,15 @@ services:
       # - ./api/var:/srv/api/var:rw
     environment:
       APP_ENV: dev
+      XDEBUG_MODE: debug
+      # default port for Xdebug 3 is 9003
+      XDEBUG_CONFIG: >-
+        client_host=host.docker.internal
+        idekey=PHPSTORM 
+      # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
+      # Then PHPStorm will use the corresponding path mappings
+      PHP_IDE_CONFIG: serverName=api-platform
+
 
   pwa:
     build:

@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/api/src/Entity/User.php">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/docker-compose.override.yml">
           <value>
             <Attribute>

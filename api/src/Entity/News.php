@@ -22,26 +22,26 @@ class News
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"news", "write"})
+     * @Groups({"read", "write"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("news")
+     * @Groups("read")
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"news", "write"})
+     * @Groups({"read", "write"})
      */
     private $text;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="news")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("news")
+     * @Groups("read")
      */
     private $author;
 

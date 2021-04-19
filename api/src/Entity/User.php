@@ -26,7 +26,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("news")
+     * @Groups("read")
      */
     private ?string $email;
 

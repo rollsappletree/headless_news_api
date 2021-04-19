@@ -3,7 +3,7 @@ resources:
     App\Entity\News:
         attributes:
             normalization_context:
-                groups: ['news']
+                groups: ['read']
             denormalization_context:
                 groups: ['write']
     App\Entity\User:

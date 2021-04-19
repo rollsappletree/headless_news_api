@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
@@ -26,10 +28,10 @@ final class AddSlugToNewsSubscriber implements EventSubscriberInterface
         $permittedMethods = [
             Request::METHOD_POST,
             Request::METHOD_PATCH,
-            Request::METHOD_PUT
+            Request::METHOD_PUT,
         ];
 
-        if (!$news instanceof News || !in_array($method, $permittedMethods)) {
+        if (!$news instanceof News || !\in_array($method, $permittedMethods, true)) {
             // Only handle News entities (Event is called on any Api entity)
             return;
         }
@@ -39,6 +41,6 @@ final class AddSlugToNewsSubscriber implements EventSubscriberInterface
             return;
         }
         $slugger = new AsciiSlugger();
-        $news->setSlug($slugger->slug($title));
+        $news->setSlug($slugger->slug($title)->toString());
     }
 }

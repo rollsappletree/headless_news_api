@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // api/tests/CommentsTest.php
 
 namespace App\Tests\Api;
@@ -9,6 +12,10 @@ use App\Repository\NewsRepository;
 use App\Tests\AbstractTest;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CommentTest extends AbstractTest
 {
     // This trait provided by HautelookAliceBundle will take care of refreshing the database content to a known state before each test
@@ -19,14 +26,14 @@ class CommentTest extends AbstractTest
     /**
      * {@inheritDoc}
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
         $this->newsRepository = $kernel->getContainer()
-                                      ->get('doctrine')
-                                      ->getManager()
-                                      ->getRepository(News::class);
+            ->get('doctrine')
+            ->getManager()
+            ->getRepository(News::class);
     }
 
     public function testGetCollection(): void
@@ -35,7 +42,7 @@ class CommentTest extends AbstractTest
         $news = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
 
         // The client implements Symfony HttpClient's `HttpClientInterface`, and the response `ResponseInterface`
-        $response = static::createClientWithCredentials()->request('GET', sprintf('/news/%s/comments', $news->getId()));
+        $response = static::createClientWithCredentials()->request('GET', \sprintf('/news/%s/comments', $news->getId()));
 
         $this->assertResponseIsSuccessful();
         // Asserts that the returned content type is JSON-LD (the default)
@@ -44,7 +51,7 @@ class CommentTest extends AbstractTest
         // Asserts that the returned JSON is a superset of this one
         $this->assertJsonContains([
             '@context' => '/contexts/Comment',
-            '@id' => sprintf('/news/%s/comments', $news->getId()),
+            '@id' => \sprintf('/news/%s/comments', $news->getId()),
             '@type' => 'hydra:Collection',
         ]);
 
@@ -58,7 +65,7 @@ class CommentTest extends AbstractTest
         //get random news:
         $news = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
 
-        $response = $this->createClientWithCredentials()->request('POST', sprintf('/news/%s/comments', $news->getId()), ['json' => [
+        $response = $this->createClientWithCredentials()->request('POST', \sprintf('/news/%s/comments', $news->getId()), ['json' => [
             'text' => 'COMMENT: Brilliantly conceived and executed, this powerful evocation of twenty-first century America gives full rein to Margaret Atwood\'s devastating irony, wit and astute perception.',
         ]]);
 
@@ -77,13 +84,12 @@ class CommentTest extends AbstractTest
     {
         //get random news:
         /** @var News $news */
-        $news    = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
+        $news = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
         /** @var Comment $comment */
         $comment = $news->getComments()->first();
-        $iri = sprintf('/comments/%d', $comment->getId());
+        $iri = \sprintf('/comments/%d', $comment->getId());
 
         $client = $this->createClientWithCredentials();
-
 
         $client->request('PUT', $iri, ['json' => [
             'text' => 'COMMENT MODIFIED: Brilliantly conceived and executed, this powerful evocation of twenty-first century America gives full rein to Margaret Atwood\'s devastating irony, wit and astute perception.',
@@ -100,10 +106,10 @@ class CommentTest extends AbstractTest
     {
         $client = $this->createClientWithCredentials();
         /** @var News $news */
-        $news    = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
+        $news = $this->newsRepository->findOneBy(['slug' => 'et-sit-enim-omnis']);
         /** @var Comment $comment */
         $comment = $news->getComments()->first();
-        $iri = sprintf('/comments/%d', $comment->getId());
+        $iri = \sprintf('/comments/%d', $comment->getId());
 
         $client->request('DELETE', $iri);
 

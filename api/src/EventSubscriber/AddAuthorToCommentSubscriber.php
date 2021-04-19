@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
@@ -13,15 +15,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class AddAuthorToCommentSubscriber implements EventSubscriberInterface
 {
-
-    /**
-     * @var TokenStorageInterface
-     */
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {
-
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -37,7 +34,7 @@ final class AddAuthorToCommentSubscriber implements EventSubscriberInterface
         $comment = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if (!$comment instanceof Comment || Request::METHOD_POST !== $method) {
+        if (!$comment instanceof Comment || $method !== Request::METHOD_POST) {
             // Only handle Comment entities (Event is called on any Api entity)
             return;
         }

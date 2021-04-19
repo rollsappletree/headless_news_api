@@ -1,12 +1,10 @@
 <?php
 
-/** @noinspection PhpPropertyOnlyWrittenInspection */
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\CreateComment;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         'in' => 'path',
                         'description' => 'news identifier',
                         'required' => true,
-                        "type" => "int"
+                        'type' => 'int',
                     ],
                 ],
             ],
@@ -33,7 +31,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'path' => '/news/{id}/comments.{_format}',
             'paramConverter' => '',
             'controller' => CreateComment::class,
-            'collection' => true
+            'collection' => true,
         ],
     ],
     itemOperations: [
@@ -44,9 +42,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
-
 )]
-#[ApiFilter(SearchFilter::class, properties: ['news' => 'exact', 'comment' => 'exact'])]
 class Comment
 {
     /**

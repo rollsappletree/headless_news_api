@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
@@ -8,12 +10,11 @@ use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 abstract class AbstractTest extends ApiTestCase
 {
+    use RefreshDatabaseTrait;
     private string $token = '';
     private $clientWithCredentials;
 
-    use RefreshDatabaseTrait;
-
-    public function setUp(): void
+    protected function setUp(): void
     {
         self::bootKernel();
     }
@@ -22,15 +23,17 @@ abstract class AbstractTest extends ApiTestCase
     {
         $token = $token ?: $this->getToken();
 
-        return static::createClient([], ['headers' => ['authorization' => 'Bearer '.$token]]);
+        return static::createClient([], ['headers' => ['authorization' => 'Bearer ' . $token]]);
     }
 
     /**
      * Use other credentials if needed.
+     *
+     * @param mixed $body
      */
     protected function getToken($body = []): string
     {
-        if ('' !== $this->token) {
+        if ($this->token !== '') {
             return $this->token;
         }
 
@@ -43,7 +46,7 @@ abstract class AbstractTest extends ApiTestCase
         ]);
 
         $this->assertResponseIsSuccessful();
-        $data = json_decode($response->getContent());
+        $data = \json_decode($response->getContent());
         $this->token = $data->token;
 
         return $data->token;

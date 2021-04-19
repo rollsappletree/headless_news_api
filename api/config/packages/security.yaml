@@ -39,10 +39,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
         - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/news, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
-        - { path: ^/greetings, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/comments, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/news, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/users, roles: IS_AUTHENTICATED_FULLY }

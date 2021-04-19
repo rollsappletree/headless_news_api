@@ -1,6 +1,10 @@
-<?php /** @noinspection PhpPropertyOnlyWrittenInspection */
+<?php
 
-    namespace App\Entity;
+declare(strict_types=1);
+
+/** @noinspection PhpPropertyOnlyWrittenInspection */
+
+namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
@@ -98,7 +102,7 @@ class User implements UserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return \array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -146,7 +150,7 @@ class User implements UserInterface
     /**
      * @return Collection|News[]
      */
-    public function getNews(): Collection|array
+    public function getNews(): Collection | array
     {
         return $this->news;
     }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // api/tests/NewsTest.php
 
 namespace App\Tests\Api;
@@ -8,6 +11,10 @@ use App\Tests\AbstractTest;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class NewsTest extends AbstractTest
 {
     // This trait provided by HautelookAliceBundle will take care of refreshing the database content to a known state before each test

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Comment;
@@ -18,11 +21,10 @@ class CreateComment
 
     public function __invoke(Comment $data, int $id): Comment
     {
-        $news = $this->newsRepository->findOneBy(['id' =>    $id]);
+        $news = $this->newsRepository->findOneBy(['id' => $id]);
         $data->setNews($news);
         $this->commentHandler->handle($data);
 
         return $data;
     }
-
 }

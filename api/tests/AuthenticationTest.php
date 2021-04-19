@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\User;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AuthenticationTest extends ApiTestCase
 {
     use ReloadDatabaseTrait;
@@ -53,7 +59,12 @@ class AuthenticationTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
 
         // test not authorized
-        $client->request('POST', '/news');
+        $client->request('POST', '/news', [
+            'json' => [
+                'title' => 'The Handmaid\'s Tale',
+                'text' => 'Brilliantly conceived and executed, this powerful evocation of twenty-first century America gives full rein to Margaret Atwood\'s devastating irony, wit and astute perception.',
+            ],
+        ]);
         $this->assertResponseStatusCodeSame(401);
 
         // test authorized
@@ -61,8 +72,8 @@ class AuthenticationTest extends ApiTestCase
             'json' => [
                 'title' => 'The Handmaid\'s Tale',
                 'text' => 'Brilliantly conceived and executed, this powerful evocation of twenty-first century America gives full rein to Margaret Atwood\'s devastating irony, wit and astute perception.',
-                ],
-            'auth_bearer' => $json['token']
+            ],
+            'auth_bearer' => $json['token'],
         ]);
         $this->assertResponseIsSuccessful();
     }

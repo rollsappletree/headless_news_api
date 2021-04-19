@@ -1,25 +1,31 @@
-start: ##start docker
+help: ##Show command list
+	@awk -F ':|##' '/^[^\t].+?:.*?##/ {printf "\033[36m%-30s\033[0m %s\n", $$1, $$NF}' $(MAKEFILE_LIST)
+
+start: ##Start docker
 	cd docker; docker-compose up -d
 
-stop: ##stop docker
+stop: ##Stop docker
 	cd docker; docker-compose stop
 
-down:
+down: ##Stop and delete docker containers
 	cd docker; docker-compose down
 
-build_docker: ##rebuild docker environment
+build_docker: ##Build docker environment
 	cd docker; docker-compose build
 
-bash: ##open a bash into php container
+bash: ##Open a bash into php container
 	docker-compose exec php bash
 
-caddy: ##open a bash into php container
+caddy: ##Open a bash into php container
 	docker-compose exec caddy sh
 
-run_fixtures: ##run fixtures
+build_db: ##Build the DB structure
+	docker-compose exec php php bin/console doctrine:migrations:migrate --no-interaction
+
+run_fixtures: ##Run fixtures
 	docker-compose exec php php bin/console hautelook:fixtures:load
 
-create_jwt_secrets:
+create_jwt_secrets: ##Create private/public key for JWT
 	docker-compose exec php sh -c '\
         set -e;\
         apk add openssl;\
@@ -32,3 +38,9 @@ create_jwt_secrets:
 
 run_tests: ##Run tests
 	docker-compose exec php bin/phpunit --testdox
+
+first_run: ##First run command - install and set up all the stuff
+	make build_docker && make start && make create_jwt_secrets && make build_db && make run_fixtures
+
+cs_fix:
+	docker-compose exec php php vendor/bin/php-cs-fixer fix

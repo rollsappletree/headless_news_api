@@ -30,8 +30,9 @@
 > You can override the configuration (mainly ports etc) by modifying `docker-compose.override.yml` conf file.
 
 ## Install
-
+The main part of this project is no the `api` directory. So switch to `api` and install all the stuff:
 ```sh
+cd api
 make first_run
 ```
 This command will:
@@ -45,7 +46,7 @@ Then go to [https://localhost](https://localhost) and accept the self signed cer
 
 Go to [https://localhost/docs](https://localhost/docs) for the OpenApi docs
 
-
+nb: all the makefile scripts are in `api` directory
 ## Run tests
 
 ```sh

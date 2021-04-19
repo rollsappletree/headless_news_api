@@ -1,0 +1,5 @@
+App\Entity\Comment:
+    comment_{1..20}:
+        text: <randomHtml(2,3)>
+        author: '@user*'
+        news: '@news*'

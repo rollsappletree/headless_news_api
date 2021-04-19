@@ -1,14 +1,20 @@
 # api/config/api_platform/resources.yaml
 resources:
-    App\Entity\News:
-        attributes:
-            normalization_context:
-                groups: ['news']
-            denormalization_context:
-                groups: ['write']
     App\Entity\User:
         attributes:
             normalization_context:
                 groups: [ 'read' ]
             denormalization_context:
                 groups: [ 'write' ]
+    App\Entity\Comment:
+        attributes:
+            normalization_context:
+                groups: [ 'read' ]
+            denormalization_context:
+                groups: [ 'write' ]
+    App\Entity\News:
+        attributes:
+            normalization_context:
+                groups: ['read']
+            denormalization_context:
+                groups: ['write']

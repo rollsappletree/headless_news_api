@@ -1,6 +1,11 @@
 App\Entity\News:
-    news_{1..20}:
+    news_{1..19}:
         title: <sentence()>
         slug: <slug()>
+        text: <randomHtml(2,3)>
+        author: '@user*'
+    news_test:
+        title: 'et sit enim omnis'
+        slug: 'et-sit-enim-omnis'
         text: <randomHtml(2,3)>
         author: '@user*'

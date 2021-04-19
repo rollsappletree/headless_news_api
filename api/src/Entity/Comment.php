@@ -1,8 +1,13 @@
-<?php /** @noinspection PhpPropertyOnlyWrittenInspection */
+<?php
 
-    namespace App\Entity;
+/** @noinspection PhpPropertyOnlyWrittenInspection */
 
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\CreateComment;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -11,9 +16,37 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 #[ApiResource(
+    collectionOperations: [
+        'post' => [
+            'openapi_context' => [
+                'parameters' => [
+                    [
+                        'name' => 'id',
+                        'in' => 'path',
+                        'description' => 'news identifier',
+                        'required' => true,
+                        "type" => "int"
+                    ],
+                ],
+            ],
+            'method' => 'POST',
+            'path' => '/news/{id}/comments.{_format}',
+            'paramConverter' => '',
+            'controller' => CreateComment::class,
+            'collection' => true
+        ],
+    ],
+    itemOperations: [
+        'get',
+        'put',
+        'patch',
+        'delete',
+    ],
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+
 )]
+#[ApiFilter(SearchFilter::class, properties: ['news' => 'exact', 'comment' => 'exact'])]
 class Comment
 {
     /**
@@ -39,6 +72,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=News::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("write")
      */
     private $news;
 
